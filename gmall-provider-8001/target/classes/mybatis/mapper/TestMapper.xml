@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mogujie.gmallprovider8001.mapper.TestMsgMapper">
+    <resultMap id="Base_test_A" type="com.mogujie.gmallapi.pojo.Test.TestA">
+        <result column="testAId" property="testAId"/>
+        <result column="testAName" property="testAName"/>
+        <association property="testB" javaType="com.mogujie.gmallapi.pojo.Test.TestB" resultMap="Base_test_B"/>
+    </resultMap>
+
+    <resultMap id="Base_test_B" type="com.mogujie.gmallapi.pojo.Test.TestB">
+        <result column="testabcid" property="testBId"/>
+        <result column="testBName" property="testBName"/>
+    </resultMap>
+
+    <select id="getTestAByResult" resultMap="Base_test_A">
+        select a.testAId,a.testAName,b.testabcid,b.testBName
+        from testa as a ,testabc as b
+        where a.testAId = #{testAId} and a.testAId = b.testabcid
+    </select>
+
+
+    <select id="getTestA" resultType="com.mogujie.gmallapi.pojo.Test.TestA">
+        select a.testAName,b.testBName as "testB.testBName"
+        from testa as a
+        inner join testabc as b
+        on a.testAId = b.testabcid
+        where a.testAId = #{testAId}
+    </select>
+
+    <select id="getTestB" resultType="com.mogujie.gmallapi.pojo.Test.TestB">
+        select * from testabc where testabcid = #{testabcid}
+    </select>
+
+    <resultMap id="test_abc" type="com.mogujie.gmallapi.pojo.Test.TestC">
+        <association property="testA" resultMap="test_a"/>
+        <association property="testB" resultMap="test_b"/>
+    </resultMap>
+    <resultMap id="test_a" type="com.mogujie.gmallapi.pojo.Test.TestA">
+        <result column="testAId" property="testAId"/>
+        <result column="testAName" property="testAName"/>
+    </resultMap>
+    <resultMap id="test_b" type="com.mogujie.gmallapi.pojo.Test.TestB">
+        <result column="testBId" property="testBId"/>
+        <result column="testBName" property="testBName"/>
+        <association property="testD" resultMap="test_d"/>
+    </resultMap>
+    <resultMap id="test_d" type="com.mogujie.gmallapi.pojo.Test.TestD">
+        <result column="testdId" property="testDId"/>
+        <result column="testdName" property="testDName"/>
+    </resultMap>
+
+    <resultMap id="getTestABCtwo" type="com.mogujie.gmallapi.pojo.Test.TestC">
+        <association property="testA" javaType="com.mogujie.gmallapi.pojo.Test.TestA">
+            <id column="testAId" property="testAId"/>
+            <result column="testAName" property="testAName"/>
+        </association>
+        <association property="testB" javaType="com.mogujie.gmallapi.pojo.Test.TestB">
+            <id column="testBId" property="testBId"/>
+            <result column="testBName" property="testBName"/>
+            <association property="testD" javaType="com.mogujie.gmallapi.pojo.Test.TestD">
+                <id column="testdId" property="testDId"/>
+                <result column="testdName" property="testDName"/>
+            </association>
+        </association>
+    </resultMap>
+
+    <select id="getTestABC" resultMap="getTestABCtwo">
+        select * from testa,testb,testd
+    </select>
+</mapper>

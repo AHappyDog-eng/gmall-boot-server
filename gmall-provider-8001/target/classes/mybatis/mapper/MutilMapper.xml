@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mogujie.gmallprovider8001.mapper.MutilDataMapper">
+    <resultMap id="Gmall_all" type="com.mogujie.gmallapi.pojo.multidata.MultiData">
+        <association property="data" javaType="com.mogujie.gmallapi.pojo.multidata.Data" resultMap="Gmall_data"/>
+    </resultMap>
+    <!--data 数据总封装-->
+    <resultMap id="Gmall_data" type="com.mogujie.gmallapi.pojo.multidata.Data">
+        <association property="banner" javaType="com.mogujie.gmallapi.pojo.multidata.Banner" resultMap="Gmall_banner"/>
+        <association property="dkeyWord" javaType="com.mogujie.gmallapi.pojo.multidata.DkeyWord"
+                     resultMap="Gmall_dkeyword"/>
+        <association property="keyWord" javaType="com.mogujie.gmallapi.pojo.multidata.KeyWord"
+                     resultMap="Gmall_keyWord"/>
+        <association property="recommend" javaType="com.mogujie.gmallapi.pojo.multidata.Recommend"
+                     resultMap="Gmall_recommend"/>
+    </resultMap>
+    <!--属性banner 封装-->
+    <resultMap id="Gmall_banner" type="com.mogujie.gmallapi.pojo.multidata.Banner">
+        <result column="banner_is_end" property="isEnd"/>
+        <result column="baner_next_page" property="nextPage"/>
+        <association property="context" javaType="com.mogujie.gmallapi.pojo.multidata.DkeyWord"
+                     resultMap="Gmall_context"/>
+        <association property="list" javaType="com.mogujie.gmallapi.pojo.multidata.ShowMsg" resultMap="Gmall_showmsg"/>
+    </resultMap>
+    <resultMap id="Gmall_showmsg" type="com.mogujie.gmallapi.pojo.multidata.ShowMsg">
+        <result column="showmsg_acm" property="acm"/>
+        <result column="showmsg_height" property="height"/>
+        <result column="showmsg_height923" property="height923"/>
+        <result column="showmsg_image" property="image"/>
+        <result column="showmsg_image923" property="image923"/>
+        <result column="showmsg_link" property="link"/>
+        <result column="showmsg_title" property="title"/>
+        <result column="showmsg_width" property="width"/>
+        <result column="showmsg_width923" property="width923"/>
+    </resultMap>
+    <!--dkeyword-->
+    <resultMap id="Gmall_dkeyword" type="com.mogujie.gmallapi.pojo.multidata.DkeyWord">
+        <result column="dkeyword_is_end" property="isEnd"/>
+        <result column="dkeyword_next_page" property="nextPage"/>
+        <association property="context" javaType="com.mogujie.gmallapi.pojo.multidata.Context"
+                     resultMap="Gmall_context"/>
+        <association property="list" javaType="com.mogujie.gmallapi.pojo.multidata.ShowMsgKeyWord"
+                     resultMap="Gmall_showmsgkeyword"/>
+    </resultMap>
+    <!--ShowMsgKeyWord-->
+    <resultMap id="Gmall_showmsgkeyword" type="com.mogujie.gmallapi.pojo.multidata.ShowMsgKeyWord">
+        <result column="showmsgkeyword_acm" property="acm"/>
+        <result column="showmsgkeyword_default_key_word" property="defaultKeyWord"/>
+    </resultMap>
+    <!--keyWord-->
+    <resultMap id="Gmall_keyWord" type="com.mogujie.gmallapi.pojo.multidata.KeyWord">
+        <result column="keyword_is_end" property="isEnd"/>
+        <result column="keyword_next_page" property="nextPage"/>
+        <association property="context" javaType="com.mogujie.gmallapi.pojo.multidata.Context"
+                     resultMap="Gmall_context"/>
+        <association property="list" javaType="com.mogujie.gmallapi.pojo.multidata.ShowMsgKey"
+                     resultMap="Gmall_showmsgkey"/>
+    </resultMap>
+    <!--showmsgkey-->
+    <resultMap id="Gmall_showmsgkey" type="com.mogujie.gmallapi.pojo.multidata.ShowMsgKey">
+        <result column="showmsgkey_acm" property="acm"/>
+        <result column="showmsgkey_is_red" property="isRed"/>
+        <result column="showmsgkey_words" property="words"/>
+    </resultMap>
+    <!--recommand-->
+    <resultMap id="Gmall_recommend" type="com.mogujie.gmallapi.pojo.multidata.Recommend">
+        <result column="recomend_is_end" property="isEnd"/>
+        <result column="recomend_next_page" property="nextPage"/>
+        <association property="context" javaType="com.mogujie.gmallapi.pojo.multidata.Context"
+                     resultMap="Gmall_context"/>
+        <association property="list" javaType="com.mogujie.gmallapi.pojo.multidata.ShowCommand" resultMap=""/>
+    </resultMap>
+    <!--showcommand-->
+    <resultMap id="Gmall_showcommand" type="com.mogujie.gmallapi.pojo.multidata.ShowCommand">
+        <result column="showcommand_acm" property="acm"/>
+        <result column="showcommand_image" property="image"/>
+        <result column="showcommand_link" property="link"/>
+        <result column="showcommand_sort" property="sort"/>
+        <result column="showcommand_title" property="title"/>
+    </resultMap>
+    <resultMap id="Gmall_context" type="com.mogujie.gmallapi.pojo.multidata.Context">
+        <result column="context_current_name" property="currentTime"/>
+    </resultMap>
+
+
+    <resultMap id="Base_test_B" type="com.mogujie.gmallapi.pojo.Test.TestB">
+        <result column="testabcid" property="testBId"/>
+        <result column="testBName" property="testBName"/>
+    </resultMap>
+    <select id="getMultiData" resultMap="Gmall_all">
+        select * from gamll_banner,gmall_context,gmall_dkeyword,gmall_keyword,gmall_recommend,gmall_showcommand,gmall_showmsg,gmall_showmsgkey,gmall_showmsgkeyword
+    </select>
+
+</mapper>

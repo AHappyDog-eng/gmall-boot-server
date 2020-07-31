@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mogujie.gmallprovider8001.mapper.OssOperatorMapper">
+    <insert id="upload" parameterType="java.lang.String">
+        insert into gmall_uploadimg (img_url) values (#{imgUrl})
+    </insert>
+    <!--批量插入img url-->
+    <insert id="uploadFiles" parameterType="java.lang.String">
+        insert into gmall_uploadimg (img_url)
+        values
+        <foreach collection="imgUrls" index="index" item="img" separator=",">
+            (#{img})
+        </foreach>
+    </insert>
+</mapper>

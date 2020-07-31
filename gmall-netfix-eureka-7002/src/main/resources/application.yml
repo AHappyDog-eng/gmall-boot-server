@@ -1,0 +1,11 @@
+server:
+  port: 7002
+
+eureka:
+  instance:
+    hostname: gmall-netfix-eureka-7002
+  client:
+    register-with-eureka: false #表示是否像eureka 注册自己
+    fetch-registry: false #为 false意思自己是注册中心
+    service-url:
+      defaultZone: http://localhost:7001/eureka/

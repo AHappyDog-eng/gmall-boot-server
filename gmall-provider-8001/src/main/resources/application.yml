@@ -1,0 +1,85 @@
+# 服务提供者
+server:
+  port: 8001
+
+# datasource
+spring:
+  application:
+    name: gmallprovider
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://192.168.0.150:3306/codestu?serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #druid config
+    druid:
+      initialSize: 5
+      minIdle: 5
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      filters: stat,wall,log4j
+      maxPoolPreparedStatementPerConnectionSize: 20
+      useGlobalDataSourceStat: true
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+  #tymeleaf 模板位置
+  thymeleaf:
+    prefix: classpath:templates/
+    suffix: .html
+    cache: false
+    encoding: UTF-8
+  # mail 配置
+  mail:
+    host: smtp.163.com
+    username: WangNingJava@163.com
+    password: QPSAPHQOBTEZZAYJ
+    default-encoding: utf-8
+    properties:
+      mail:
+        smtp:
+          socketFactoryClass: javax.net.ssl.SSLSocketFactory
+        debug: true
+
+  # MultiPart config
+  profiles:
+    active: aeolian
+  servlet:
+    multipart:
+      # 开启功能
+      enabled: true
+      # 文件传输阀值
+      file-size-threshold: 1KB
+      # 最大文件的大小为 200M
+      max-file-size: 200MB
+      # 最大请求request-size 为 250MB
+      max-request-size: 250MB
+
+# eureka
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka/,http://localhost:7002/eureka/
+  instance:
+    instance-id: gmall-provider-8001
+
+# mybatis
+mybatis:
+  mapper-locations: classpath:/mybatis/**/*.xml
+  type-aliases-package: com.mogujie.gmallapi.pojo
+  configuration:
+    map-underscore-to-camel-case: true
+
+# pagehelper 分页插件
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql

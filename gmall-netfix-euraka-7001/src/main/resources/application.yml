@@ -1,5 +1,5 @@
 server:
-  port: 7001
+  port: ****
 
 # eureka
 eureka:
@@ -9,4 +9,4 @@ eureka:
     register-with-eureka: false #表示是否像eureka 注册自己
     fetch-registry: false #为 false意思自己是注册中心
     service-url:
-      defaultZone: http://localhost:7002/eureka/
+      defaultZone:*****

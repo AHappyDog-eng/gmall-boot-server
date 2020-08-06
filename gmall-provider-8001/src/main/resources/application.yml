@@ -1,6 +1,6 @@
 # 服务提供者
 server:
-  port: 8001
+  port: ******
 
 # datasource
 spring:
@@ -8,9 +8,9 @@ spring:
     name: gmallprovider
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://192.168.0.150:3306/codestu?serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true
-    username: root
-    password: 123456
+    url: jdbc:******
+    username: ******
+    password: ******
     driver-class-name: com.mysql.cj.jdbc.Driver
     #druid config
     druid:
@@ -38,9 +38,9 @@ spring:
     encoding: UTF-8
   # mail 配置
   mail:
-    host: smtp.163.com
-    username: WangNingJava@163.com
-    password: QPSAPHQOBTEZZAYJ
+    host: ******
+    username: ******
+    password: ******
     default-encoding: utf-8
     properties:
       mail:
@@ -66,7 +66,7 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:7001/eureka/,http://localhost:7002/eureka/
+      defaultZone: ******
   instance:
     instance-id: gmall-provider-8001
 

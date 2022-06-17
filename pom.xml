@@ -28,7 +28,7 @@
         <spring.cloud.version>Greenwich.SR1</spring.cloud.version>
         <spring.boot.version>2.1.4.RELEASE</spring.boot.version>
         <spring.boot.startmail.version>2.2.2.RELEASE</spring.boot.startmail.version>
-        <fastjson.version>1.2.62</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <springbootstart.version>2.1.4.RELEASE</springbootstart.version>
         <pagehelper.version>1.2.10</pagehelper.version>
         <oos.version>2.4.0</oos.version>
